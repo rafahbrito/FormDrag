@@ -1,10 +1,16 @@
-import { ThemeProvider } from '@/components/theme-provider'
-import { ClerkProvider } from '@clerk/nextjs'
-import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
 import './globals.css'
 
-const inter = Inter({ subsets: ['latin'] })
+import { ClerkProvider } from '@clerk/nextjs'
+import type { Metadata } from 'next'
+import { Inter as FontSans } from 'next/font/google'
+
+import { ThemeProvider } from '@/components/theme-provider'
+import { cn } from '@/lib/utils'
+
+export const fontSans = FontSans({
+  subsets: ['latin'],
+  variable: '--font-sans',
+})
 
 export const metadata: Metadata = {
   title: 'FormDrag',
@@ -19,7 +25,12 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="pt-BR">
-        <body className={inter.className}>
+        <body
+          className={cn(
+            'min-h-screen bg-background font-sans antialiased',
+            fontSans.variable,
+          )}
+        >
           <ThemeProvider
             attribute="class"
             defaultTheme="system"
